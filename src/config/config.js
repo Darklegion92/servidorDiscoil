@@ -1,6 +1,6 @@
 module.exports = {
     PORT: process.env.PORT || 3001,
-    DB: process.env.URI || 'E:\\TNS\\TNS.GDB',
+    DB: process.env.URI || 'C:\\TNS\\TNS.GDB',
     SECRET_TOKEN: "SOLTEC-tecnologiaydesarrollo$",
     IP: process.env.IP || "localhost",
     PORT_DB: process.env.PORT_DB || 3050,
