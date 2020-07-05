@@ -7,6 +7,10 @@ const UsuariosSchema = new Schema({
     required: true,
     lowercase: true,
   },
+  apellido: {
+    type: String,
+    lowercase: true,
+  },
   facturas: {
     type: Array,
   },
@@ -27,7 +31,7 @@ const UsuariosSchema = new Schema({
     lowercase: true,
     unique: true,
   },
-  telefono: {
+  celular1: {
     type: String,
     required: true,
     lowercase: true,
@@ -51,6 +55,9 @@ const UsuariosSchema = new Schema({
   roles: {
     type: Array,
     required: true,
+  },
+  fecha: {
+    type: Date,
   },
   createAt: {
     type: Date,

@@ -24,8 +24,6 @@ async function guardar(req, res) {
       res.status(201).send({ mensaje: "No Se Guardo Pedido", status: 201 });
     }
   } catch (error) {
-    console.log(error);
-
     res.status(501).send({ mensaje: error, status: 501 });
   }
 }
@@ -39,18 +37,54 @@ async function consultar(req, res) {
     //se consulta el Articulo
 
     const pedido = await Pedidos.findById(id);
-    
+
     if (pedido) {
       res.status(200).send(pedido);
     } else {
       res.status(201).send({ mensaje: "No Se Guardo Pedido", status: 201 });
     }
   } catch (error) {
-    console.log(error);
+    res.status(501).send({ mensaje: error, status: 501 });
+  }
+}
+
+async function consultarFiltros(req, res) {
+  res.setHeader("Content-Type", "application/json");
+
+  const { fechainicial, fechafinal } = req.query;
+
+  try {
+    const pedidos = await Pedidos.find({
+      createAt: { $lte: new Date(fechafinal) },
+    });
+
+    if (pedidos) {
+      res.status(200).send(pedidos);
+    } else {
+      res.status(201).send({ mensaje: "No Se Guardo Pedido", status: 201 });
+    }
+  } catch (error) {
 
     res.status(501).send({ mensaje: error, status: 501 });
   }
 }
+
+async function consultarTotal(req, res) {
+  res.setHeader("Content-Type", "application/json");
+  try {
+    const pedidos = await Pedidos.find();
+
+    if (pedidos) {
+      res.status(200).send(pedidos);
+    } else {
+      res.status(201).send({ mensaje: "No Se Guardo Pedido", status: 201 });
+    }
+  } catch (error) {
+
+    res.status(501).send({ mensaje: error, status: 501 });
+  }
+}
+
 async function cambiarEstado(req, res) {
   res.setHeader("Content-Type", "application/json");
 
@@ -59,9 +93,8 @@ async function cambiarEstado(req, res) {
   try {
     //se consulta el Articulo
     const pedido = await Pedidos.updateOne({ _id: id }, { estado: tipo });
-    console.log(pedido);
 
-    if (pedido.nModified>0) {
+    if (pedido.nModified > 0) {
       res
         .status(200)
         .send({ mensaje: "Se Actualizo Correctamente", status: 200 });
@@ -69,7 +102,6 @@ async function cambiarEstado(req, res) {
       res.status(201).send({ mensaje: "No Se Encontro Pedido", status: 201 });
     }
   } catch (error) {
-    console.log(error);
 
     res.status(501).send({ mensaje: error, status: 501 });
   }
@@ -82,6 +114,8 @@ function error(req, res) {
 module.exports = {
   guardar,
   cambiarEstado,
+  consultarFiltros,
   consultar,
+  consultarTotal,
   error,
 };
