@@ -3,7 +3,6 @@ const moment = require('moment')
 const config = require('../config/config')
 
 function isAuth(req,res,next){
-    
     if(!req.headers.autorizacion){
         return res.status(403).send({res: "No Tiene Autorización"})
     }
