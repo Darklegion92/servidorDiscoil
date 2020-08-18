@@ -8,8 +8,6 @@ async function guardar(req, res) {
   const { items, usuario, total } = req.body;
 
   try {
-    //se consulta el Articulo
-
     const pedido = new Pedidos({ items, usuario, total });
 
     const resp = await pedido.save();
@@ -24,6 +22,7 @@ async function guardar(req, res) {
       res.status(201).send({ mensaje: "No Se Guardo Pedido", status: 201 });
     }
   } catch (error) {
+    console.log(error);
     res.status(501).send({ mensaje: error, status: 501 });
   }
 }
@@ -64,7 +63,6 @@ async function consultarFiltros(req, res) {
       res.status(201).send({ mensaje: "No Se Guardo Pedido", status: 201 });
     }
   } catch (error) {
-
     res.status(501).send({ mensaje: error, status: 501 });
   }
 }
@@ -80,7 +78,6 @@ async function consultarTotal(req, res) {
       res.status(201).send({ mensaje: "No Se Guardo Pedido", status: 201 });
     }
   } catch (error) {
-
     res.status(501).send({ mensaje: error, status: 501 });
   }
 }
@@ -102,7 +99,6 @@ async function cambiarEstado(req, res) {
       res.status(201).send({ mensaje: "No Se Encontro Pedido", status: 201 });
     }
   } catch (error) {
-
     res.status(501).send({ mensaje: error, status: 501 });
   }
 }

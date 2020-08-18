@@ -62,7 +62,6 @@ async function crear(req, res) {
   res.setHeader("Content-Type", "application/json");
 
   const usuario = new Usuario(req.body);
-
   const resp = await usuario.save();
   if (resp) {
     return res.status(200).send({ mesaje: "respuesta", status: 200 });

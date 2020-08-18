@@ -5,7 +5,7 @@ const conexionFirebird = require("../services/conectionFirebird");
  */
 async function nombre(req, res) {
   res.setHeader("Content-Type", "application/json");
-  const nombre = req.params.nombre;
+  const nombre = req.query.nombre;
 
   try {
     //se consulta el Articulo
